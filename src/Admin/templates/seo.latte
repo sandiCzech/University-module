@@ -1,0 +1,8 @@
+{block #content}
+	
+	{include tabs.latte active => 'seo'}
+	
+	{var t = $basePathModule . "AdminModule/templates/system/seoSettings.latte"}
+  	{include $t id => $idPage}
+
+{/block}
