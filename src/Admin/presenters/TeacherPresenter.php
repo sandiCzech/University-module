@@ -8,7 +8,7 @@
 namespace AdminModule\UniversityModule;
 
 use Nette\Forms\Form;
-use WebCMS\Entity\Teacher;
+use WebCMS\UniversityModule\Entity\Teacher;
 
 /**
  *
@@ -48,10 +48,7 @@ class TeacherPresenter extends BasePresenter
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
         $grid->addColumnText('name', 'Name')->setSortable()->setFilterText();
-        $grid->addColumnDate('department', 'Department')->setSortable();
-
-        $grid->addActionHref("deactivate", 'Deactivate', 'deactivate', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-primary', 'ajax', 'grey')));
-        $grid->addActionHref("detail", 'Businessman detail', 'detail', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-primary', 'green')));
+        $grid->addColumnText('department', 'Department')->setSortable();
 
         $grid->addActionHref("update", 'Edit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Delete', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
@@ -94,11 +91,14 @@ class TeacherPresenter extends BasePresenter
     {
         $form = $this->createForm('form-submit', 'default', null);
 
+        $options = array('jedna', 'dva');
+
         $form->addText('name', 'Name')
             ->setRequired('Email is mandatory.');
         $form->addText('department', 'Department');
+        $form->addMultiSelect('fields', 'Fields', $options);
 
-        $form->addSubmit('save', 'Save new teacher');
+        $form->addSubmit('save', 'Save teacher');
 
         $form->onSuccess[] = callback($this, 'formSubmitted');
 
@@ -107,7 +107,24 @@ class TeacherPresenter extends BasePresenter
 
     public function formSubmitted($form)
     {
-        
+        $values = $form->getValues();
+
+        if (!$this->teacher) {
+            $this->teacher = new Teacher;
+            $this->em->persist($this->teacher);
+        }
+
+        $this->teacher->setName($values->name);
+        $this->teacher->setDepartment($values->department); 
+        $this->teacher->setActive(true);    
+
+        $this->em->flush();
+
+        $this->flashMessage('Teacher has been saved/updated.', 'success');
+
+        $this->forward('default', array(
+            'idPage' => $this->actualPage->getId()
+        ));
     }
 
     
