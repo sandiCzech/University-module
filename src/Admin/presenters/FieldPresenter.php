@@ -89,7 +89,7 @@ class FieldPresenter extends BasePresenter
         $form = $this->createForm('form-submit', 'default', null);
 
         $form->addText('name', 'Name')
-            ->setRequired('Email is mandatory.');
+            ->setRequired('Name is mandatory.');
 
         $form->addSubmit('save', 'Save field');
 

@@ -91,7 +91,7 @@ class TeacherPresenter extends BasePresenter
     {
         $form = $this->createForm('form-submit', 'default', null);
 
-        $options = array('jedna', 'dva');
+        $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
 
         $form->addText('name', 'Name')
             ->setRequired('Email is mandatory.');

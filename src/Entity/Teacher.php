@@ -40,6 +40,12 @@ class Teacher extends \WebCMS\Entity\Entity
      */
     private $department;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Field", mappedBy="teacher") 
+     * @var Array
+     */
+    private $fields;
+
 
     public function getName()
     {
@@ -82,6 +88,15 @@ class Teacher extends \WebCMS\Entity\Entity
     public function setDepartment($department)
     {
         $this->department = $department;
+        return $this;
+    }
+
+    public function getFields() {
+        return $this->fields;
+    }
+
+    public function setFields($fields) {
+        $this->fields = $fields;
         return $this;
     }
 
