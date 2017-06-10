@@ -41,8 +41,8 @@ class Teacher extends \WebCMS\Entity\Entity
     private $department;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Field", mappedBy="teacher") 
-     * @ORM\JoinTable(name="teacher_id", joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="field_id",referencedColumnName="id", unique=true)})
+     * @ORM\ManyToMany(targetEntity="Field") 
+     * @ORM\JoinTable(name="university_teacherfields", joinColumns={@ORM\JoinColumn(name="teacher_id", referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="field_id",referencedColumnName="id", unique=true)})
      */
     private $fields;
 
