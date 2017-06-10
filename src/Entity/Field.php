@@ -22,12 +22,6 @@ class Field extends \WebCMS\Entity\Entity
      */
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Teacher")
-     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id")
-     */
-    private $teacher;
-
 
     public function getName()
     {
@@ -37,17 +31,6 @@ class Field extends \WebCMS\Entity\Entity
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
-    }
-
-    public function getTeacher()
-    {
-        return $this->teacher;
-    }
-    
-    public function setTeacher($teacher)
-    {
-        $this->teacher = $teacher;
         return $this;
     }
 
