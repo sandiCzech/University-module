@@ -30,7 +30,8 @@ class SettingsPresenter extends BasePresenter
     {
 		$settings = array();
 
-        $settings[] = $this->settings->get('Teachers count', 'newsModule' . $this->actualPage->getId(), 'text', array());
+        $settings[] = $this->settings->get('Teachers count', 'universityModule' . $this->actualPage->getId(), 'text', array());
+        $settings[] = $this->settings->get('Hide title', 'pageModule' . $this->actualPage->getId(), 'checkbox', array());
 
 		return $this->createSettingsForm($settings);
     }

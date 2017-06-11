@@ -20,15 +20,20 @@ class TeacherPresenter extends BasePresenter
 
 	private $repository;
 
+	private $fieldsRepository;
+
 	private $teacher;
 
 	private $teachers;
+
+	private $fields;
 	
 	protected function startup() 
     {
 		parent::startup();
 
 		$this->repository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Teacher');
+		$this->fieldsRepository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field');
 	}
 
 	protected function beforeRender()
@@ -39,10 +44,28 @@ class TeacherPresenter extends BasePresenter
 	public function actionDefault($id)
     {	
 		$this->teachers = $this->repository->findAll();
+		$this->fields = $this->fieldsRepository->findAll();
 	}
 
 	public function renderDefault($id)
 	{
+
+		$detail = $this->getParameter('parameters');
+
+		if (count($detail) > 0) {
+		    $this->teacher = $this->repository->findOneBySlug($detail[0]);
+
+		    if (!is_object($this->teacher)) {
+				$this->redirect('default', array(
+				    'path' => $this->actualPage->getPath(),
+				    'abbr' => $this->abbr
+				));
+		    } else {
+		    	$this->template->teacher = $this->teacher;
+		    }
+		}
+
+		$this->template->fields = $this->fields;
 		$this->template->teachers = $this->teachers;
 		$this->template->id = $id;
 	}
