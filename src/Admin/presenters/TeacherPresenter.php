@@ -68,6 +68,7 @@ class TeacherPresenter extends BasePresenter
     {
         $this->reloadContent();
 
+        $this->template->teacher = $this->teacher;
         $this->template->idPage = $idPage;
     }
     
@@ -123,6 +124,27 @@ class TeacherPresenter extends BasePresenter
         if (!$this->teacher) {
             $this->teacher = new Teacher;
             $this->em->persist($this->teacher);
+        }
+
+        if (array_key_exists('files', $_POST)) {
+
+            $counter = 0;
+            
+            foreach($_POST['files'] as $path){
+
+                $photo = new \WebCMS\UniversityModule\Entity\Photo;
+                $photo->setTitle($_POST['fileNames'][$counter]);
+                
+                $photo->setPath($path);
+
+                $this->teacher->setPhoto($photo); 
+
+                $this->em->persist($photo);
+
+                $counter++;
+            }
+        } else {
+            $this->teacher->setPhoto(null); 
         }
 
         $this->teacher->setName($values->name);

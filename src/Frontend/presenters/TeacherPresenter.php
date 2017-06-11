@@ -17,10 +17,18 @@ use WebCMS\UniversityModule\Entity\Teacher;
 class TeacherPresenter extends BasePresenter
 {
 	private $id;
+
+	private $repository;
+
+	private $teacher;
+
+	private $teachers;
 	
 	protected function startup() 
     {
 		parent::startup();
+
+		$this->repository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Teacher');
 	}
 
 	protected function beforeRender()
@@ -30,7 +38,13 @@ class TeacherPresenter extends BasePresenter
 
 	public function actionDefault($id)
     {	
-		
+		$this->teachers = $this->repository->findAll();
+	}
+
+	public function renderDefault($id)
+	{
+		$this->template->teachers = $this->teachers;
+		$this->template->id = $id;
 	}
 
 }
