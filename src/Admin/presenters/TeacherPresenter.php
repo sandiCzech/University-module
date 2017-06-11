@@ -93,10 +93,19 @@ class TeacherPresenter extends BasePresenter
 
         $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
 
+        
+        foreach ($options as $option) {
+            $optionsToSelect[$option->getId()] = $option->getName();
+        }
+
         $form->addText('name', 'Name')
             ->setRequired('Email is mandatory.');
         $form->addText('department', 'Department');
-        $form->addMultiSelect('fields', 'Fields', $options);
+        $form->addMultiSelect('fields', 'Fields', $optionsToSelect);
+
+        if ($this->teacher) {
+            $form->setDefaults($this->teacher->toArray());
+        }
 
         $form->addSubmit('save', 'Save teacher');
 
@@ -116,6 +125,18 @@ class TeacherPresenter extends BasePresenter
 
         $this->teacher->setName($values->name);
         $this->teacher->setDepartment($values->department); 
+
+        if ($values->fields) {
+            foreach ($values->fields as $key => $value) {
+                $field = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->find($value);
+
+                $fields[] = $field;
+            }
+
+            $this->teacher->setFields($fields); 
+        }
+
+        
         $this->teacher->setActive(true);    
 
         $this->em->flush();
