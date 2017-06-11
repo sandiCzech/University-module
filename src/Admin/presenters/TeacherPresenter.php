@@ -102,6 +102,8 @@ class TeacherPresenter extends BasePresenter
             ->setRequired('Email is mandatory.');
         $form->addText('department', 'Department');
         $form->addMultiSelect('fields', 'Fields', $optionsToSelect);
+        $form->addTextArea('perex', 'Perex')->setAttribute('class', array('editor'));
+        $form->addTextArea('text', 'Text')->setAttribute('class', array('editor'));
 
         if ($this->teacher) {
             $form->setDefaults($this->teacher->toArray());
@@ -125,6 +127,8 @@ class TeacherPresenter extends BasePresenter
 
         $this->teacher->setName($values->name);
         $this->teacher->setDepartment($values->department); 
+        $this->teacher->setPerex($values->perex);
+        $this->teacher->setText($values->text); 
 
         if ($values->fields) {
             foreach ($values->fields as $key => $value) {

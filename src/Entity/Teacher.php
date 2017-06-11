@@ -46,6 +46,22 @@ class Teacher extends \WebCMS\Entity\Entity
      */
     private $fields;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $perex;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $text;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Photo")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $photo;
+
 
     public function getName()
     {
@@ -100,6 +116,31 @@ class Teacher extends \WebCMS\Entity\Entity
         return $this;
     }
 
+    public function getPerex() {
+        return $this->perex;
+    }
 
+    public function setPerex($perex) {
+        $this->perex = $perex;
+        return $this;
+    }
+
+    public function getText() {
+        return $this->text;
+    }
+
+    public function setText($text) {
+        $this->text = $text;
+        return $this;
+    }
+
+    public function getPhoto() {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo) {
+        $this->photo = $photo;
+        return $this;
+    }
 
 }

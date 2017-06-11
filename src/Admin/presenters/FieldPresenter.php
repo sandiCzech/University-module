@@ -91,6 +91,10 @@ class FieldPresenter extends BasePresenter
         $form->addText('name', 'Name')
             ->setRequired('Name is mandatory.');
 
+        if ($this->field) {
+            $form->setDefaults($this->field->toArray());
+        }
+
         $form->addSubmit('save', 'Save field');
 
         $form->onSuccess[] = callback($this, 'formSubmitted');
