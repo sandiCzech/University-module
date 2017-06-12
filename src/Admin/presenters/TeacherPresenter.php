@@ -100,7 +100,7 @@ class TeacherPresenter extends BasePresenter
         }
 
         $form->addText('name', 'Name')
-            ->setRequired('Email is mandatory.');
+            ->setRequired('Name is mandatory.');
         $form->addText('department', 'Department');
         $form->addMultiSelect('fields', 'Fields', $optionsToSelect);
         $form->addTextArea('perex', 'Perex')->setAttribute('class', array('editor'));

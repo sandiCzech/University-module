@@ -37,11 +37,16 @@ class University extends \WebCMS\Module
 		),
         array(
             'name' => 'Field',
-            'frontend' => true,
+            'frontend' => false,
             'parameters' => true
         ),
         array(
             'name' => 'Material',
+            'frontend' => true,
+            'parameters' => true
+        ),
+        array(
+            'name' => 'Subject',
             'frontend' => true,
             'parameters' => true
         ),
