@@ -39,7 +39,7 @@ class SubjectPresenter extends BasePresenter
         $this->template->idPage = $idPage;
     }
 
-    protected function createComponentTeacherGrid($name)
+    protected function createComponentSubjectGrid($name)
     {
         $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Subject", null, array());
 
