@@ -12,9 +12,9 @@ use Gedmo\Mapping\Annotation as gedmo;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="university_Teacher")
+ * @ORM\Table(name="university_Subject")
  */
-class Teacher extends \WebCMS\Entity\Entity
+class Subject extends \WebCMS\Entity\Entity
 {
 
     /**
