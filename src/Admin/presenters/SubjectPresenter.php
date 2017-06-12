@@ -96,7 +96,9 @@ class SubjectPresenter extends BasePresenter
         $form->addTextArea('text', 'Text')->setAttribute('class', array('editor'));
 
         $form->addTextArea('textPlan', 'Text Plan')->setAttribute('class', array('editor'));
+        $form->addText('urlPlan', 'Url Plan');
         $form->addTextArea('textSchedule', 'Text Schedule')->setAttribute('class', array('editor'));
+        $form->addText('urlSchedule', 'Url Schedule');
         $form->addTextArea('textExperience', 'Text Experience')->setAttribute('class', array('editor'));
         $form->addTextArea('textRequirements', 'Text Requirements')->setAttribute('class', array('editor'));
         $form->addTextArea('textInternship', 'Text Internship')->setAttribute('class', array('editor'));
@@ -123,31 +125,33 @@ class SubjectPresenter extends BasePresenter
             $this->em->persist($this->subject);
         }
 
-        // if (array_key_exists('files', $_POST)) {
+        if (array_key_exists('files', $_POST)) {
 
-        //     $counter = 0;
+            $counter = 0;
             
-        //     foreach($_POST['files'] as $path){
+            foreach($_POST['files'] as $path){
 
-        //         $photo = new \WebCMS\UniversityModule\Entity\Photo;
-        //         $photo->setTitle($_POST['fileNames'][$counter]);
+                $photo = new \WebCMS\UniversityModule\Entity\Photo;
+                $photo->setTitle($_POST['fileNames'][$counter]);
                 
-        //         $photo->setPath($path);
+                $photo->setPath($path);
 
-        //         $this->teacher->setPhoto($photo); 
+                $this->subject->setPhoto($photo); 
 
-        //         $this->em->persist($photo);
+                $this->em->persist($photo);
 
-        //         $counter++;
-        //     }
-        // } else {
-        //     $this->teacher->setPhoto(null); 
-        // }
+                $counter++;
+            }
+        } else {
+            $this->subject->setPhoto(null); 
+        }
 
         $this->subject->setName($values->name);
         $this->subject->setPerex($values->perex);
         $this->subject->setTextPlan($values->textPlan); 
+        $this->subject->setUrlPlan($values->urlPlan); 
         $this->subject->setTextSchedule($values->textSchedule); 
+        $this->subject->setUrlSchedule($values->urlSchedule); 
         $this->subject->setTextExperience($values->textExperience); 
         $this->subject->setTextRequirements($values->textRequirements); 
         $this->subject->setTextInternship($values->textInternship); 

@@ -58,7 +58,17 @@ class Subject extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    private $urlPlan;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $textSchedule;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $urlSchedule;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -159,6 +169,15 @@ class Subject extends \WebCMS\Entity\Entity
         return $this;
     }
 
+    public function getUrlPlan() {
+        return $this->urlPlan;
+    }
+
+    public function setUrlPlan($urlPlan) {
+        $this->urlPlan = $urlPlan;
+        return $urlPlan;
+    }
+
     public function getTextSchedule() {
         return $this->textSchedule;
     }
@@ -167,6 +186,16 @@ class Subject extends \WebCMS\Entity\Entity
         $this->textSchedule = $textSchedule;
         return $this;
     }
+
+    public function getUrlSchedule() {
+        return $this->urlSchedule;
+    }
+
+    public function setUrlSchedule($urlSchedule) {
+        $this->urlSchedule = $urlSchedule;
+        return $this;
+    }
+
     public function getTextExperience() {
         return $this->textExperience;
     }
