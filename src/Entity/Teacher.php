@@ -47,12 +47,12 @@ class Teacher extends \WebCMS\Entity\Entity
     private $fields;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $perex;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $text;
 
