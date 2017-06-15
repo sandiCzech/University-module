@@ -45,7 +45,8 @@ class MaterialPresenter extends BasePresenter
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
-        $grid->addColumnText('name', 'Name')->setSortable()->setFilterText();
+        $grid->addColumnText('title', 'Title')->setSortable()->setFilterText();
+        $grid->addColumnText('author', 'Author')->setSortable()->setFilterText();
 
         $grid->addActionHref("update", 'Edit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Delete', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
@@ -118,6 +119,8 @@ class MaterialPresenter extends BasePresenter
     {
         $values = $form->getValues();
 
+        $page = $this->em->getRepository('\WebCMS\Entity\Page')->find($this->getParameter('idPage'));
+
         if (!$this->material) {
             $this->material = new Material;
             $this->em->persist($this->material);
@@ -127,6 +130,7 @@ class MaterialPresenter extends BasePresenter
         $this->material->setUrl($values->url); 
         $this->material->setAuthor($values->author);
         $this->material->setText($values->text); 
+        $this->material->setPage($page);
 
         if ($values->categories) {
             foreach ($values->categories as $key => $value) {
@@ -135,9 +139,8 @@ class MaterialPresenter extends BasePresenter
                 $categories[] = $category;
             }
 
-            $this->material->setCategorie($categories); 
+            $this->material->setCategories($categories); 
         }
-
         
         $this->material->setActive(true);    
 

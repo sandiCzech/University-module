@@ -51,6 +51,11 @@ class University extends \WebCMS\Module
             'parameters' => true
         ),
         array(
+            'name' => 'Absolvent',
+            'frontend' => true,
+            'parameters' => true
+        ),
+        array(
             'name' => 'Subject',
             'frontend' => true,
             'parameters' => true

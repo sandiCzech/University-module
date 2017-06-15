@@ -57,7 +57,7 @@ class Material extends \WebCMS\Entity\Entity
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WebCMS\PageModule\Entity\Page")
+     * @ORM\ManyToOne(targetEntity="WebCMS\Entity\Page")
      * @orm\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $page;
