@@ -8,16 +8,16 @@
 namespace AdminModule\UniversityModule;
 
 use Nette\Forms\Form;
-use WebCMS\UniversityModule\Entity\Teacher;
+use WebCMS\UniversityModule\Entity\Absolvent;
 
 /**
  *
  * @author Jakub Sanda <jakub.sanda@webcook.cz>
  */
-class TeacherPresenter extends BasePresenter
+class AbsolventPresenter extends BasePresenter
 {
     
-    private $teacher;
+    private $absolvent;
 
     protected function startup()
     {
@@ -39,14 +39,13 @@ class TeacherPresenter extends BasePresenter
         $this->template->idPage = $idPage;
     }
 
-    protected function createComponentTeacherGrid($name)
+    protected function createComponentAbsolventGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Teacher", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Absolvent", null, array());
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
         $grid->addColumnText('name', 'Name')->setSortable()->setFilterText();
-        $grid->addColumnText('department', 'Department')->setSortable();
 
         $grid->addActionHref("update", 'Edit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Delete', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
@@ -58,7 +57,7 @@ class TeacherPresenter extends BasePresenter
     public function actionUpdate($id, $idPage)
     {
         if ($id) {
-            $this->teacher = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Teacher')->find($id);
+            $this->absolvent = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Absolvent')->find($id);
         }
     }
 
@@ -66,18 +65,18 @@ class TeacherPresenter extends BasePresenter
     {
         $this->reloadContent();
 
-        $this->template->teacher = $this->teacher;
+        $this->template->absolvent = $this->absolvent;
         $this->template->idPage = $idPage;
     }
     
     public function actionDelete($id){
 
-        $teacher = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Teacher')->find($id);
+        $absolvent = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Absolvent')->find($id);
 
-        $this->em->remove($teacher);
+        $this->em->remove($absolvent);
         $this->em->flush();
         
-        $this->flashMessage('Teacher has been removed.', 'success');
+        $this->flashMessage('Absolvent has been removed.', 'success');
         
         if(!$this->isAjax()){
             $this->forward('default', array(
@@ -90,25 +89,16 @@ class TeacherPresenter extends BasePresenter
     {
         $form = $this->createForm('form-submit', 'default', null);
 
-        $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
-
-        
-        foreach ($options as $option) {
-            $optionsToSelect[$option->getId()] = $option->getName();
-        }
-
         $form->addText('name', 'Name')
             ->setRequired('Name is mandatory.');
         $form->addText('department', 'Department');
-        $form->addMultiSelect('fields', 'Fields', $optionsToSelect);
-        $form->addTextArea('perex', 'Perex')->setAttribute('class', array('editor'));
         $form->addTextArea('text', 'Text')->setAttribute('class', array('editor'));
 
-        if ($this->teacher) {
-            $form->setDefaults($this->teacher->toArray());
+        if ($this->absolvent) {
+            $form->setDefaults($this->absolvent->toArray());
         }
 
-        $form->addSubmit('save', 'Save teacher');
+        $form->addSubmit('save', 'Save absolvent');
 
         $form->onSuccess[] = callback($this, 'formSubmitted');
 
@@ -119,9 +109,9 @@ class TeacherPresenter extends BasePresenter
     {
         $values = $form->getValues();
 
-        if (!$this->teacher) {
-            $this->teacher = new Teacher;
-            $this->em->persist($this->teacher);
+        if (!$this->absolvent) {
+            $this->absolvent = new Absolvent;
+            $this->em->persist($this->absolvent);
         }
 
         if (array_key_exists('files', $_POST)) {
@@ -135,37 +125,25 @@ class TeacherPresenter extends BasePresenter
                 
                 $photo->setPath($path);
 
-                $this->teacher->setPhoto($photo); 
+                $this->absolvent->setPhoto($photo); 
 
                 $this->em->persist($photo);
 
                 $counter++;
             }
         } else {
-            $this->teacher->setPhoto(null); 
+            $this->absolvent->setPhoto(null); 
         }
 
-        $this->teacher->setName($values->name);
-        $this->teacher->setDepartment($values->department); 
-        $this->teacher->setPerex($values->perex);
-        $this->teacher->setText($values->text); 
-
-        if ($values->fields) {
-            foreach ($values->fields as $key => $value) {
-                $field = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->find($value);
-
-                $fields[] = $field;
-            }
-
-            $this->teacher->setFields($fields); 
-        }
-
+        $this->absolvent->setName($values->name);
+        $this->absolvent->setDepartment($values->department); 
+        $this->absolvent->setText($values->text); 
         
-        $this->teacher->setActive(true);    
+        $this->absolvent->setActive(true);    
 
         $this->em->flush();
 
-        $this->flashMessage('Teacher has been saved/updated.', 'success');
+        $this->flashMessage('Absolvent has been saved/updated.', 'success');
 
         $this->forward('default', array(
             'idPage' => $this->actualPage->getId()

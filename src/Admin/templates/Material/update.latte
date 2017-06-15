@@ -1,0 +1,55 @@
+{block content}
+
+	<div class="page-heading">	
+		<h1>{_'Add/edit material'}</h1>
+	</div>
+
+	<div class="control-group">
+		<a n:href="default idPage => $idPage" class="back">{_'Back to materials'}</a>
+	</div>
+
+	{form form}
+
+		<div class="control-group row">
+
+			<div class="col-md-10">
+
+				<div class="form-group">
+					{label title /}
+					{input title class => 'form-control'}
+		        </div>
+
+		        <div class="form-group">
+					{label url /}
+					{input url class => 'form-control'}
+		        </div>
+
+		        <div class="form-group">
+					{label author /}
+					{input author class => 'form-control editor'}
+		        </div>
+
+		        <div class="form-group">
+					{label categories /}
+					{input categories class => 'form-control'}
+		        </div>
+
+		        <div class="form-group">
+					{label text /}
+					{input text class => 'form-control editor'}
+		        </div>
+
+	        </div>
+
+        </div>
+
+        <div class="form-actions">
+
+			{input save class => 'btn btn-success'}
+
+		</div>
+
+
+	{/form}
+
+{/block}
