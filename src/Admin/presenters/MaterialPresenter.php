@@ -49,6 +49,7 @@ class MaterialPresenter extends BasePresenter
 
         $grid->addColumnText('title', 'Title')->setSortable()->setFilterText();
         $grid->addColumnText('author', 'Author')->setSortable()->setFilterText();
+        $grid->addColumnText('url', 'Url')->setFilterText();
 
         $grid->addActionHref("update", 'Edit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Delete', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
