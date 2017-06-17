@@ -41,7 +41,9 @@ class MaterialPresenter extends BasePresenter
 
     protected function createComponentMaterialGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Material", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Material", null, array(
+            'page = '.$this->getParameter('idPage')
+        ));
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 

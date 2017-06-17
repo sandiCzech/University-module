@@ -51,6 +51,12 @@ class Absolvent extends \WebCMS\Entity\Entity
      */
     private $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="WebCMS\Entity\Page")
+     * @orm\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $page;
+
 
     public function getName()
     {
@@ -111,6 +117,15 @@ class Absolvent extends \WebCMS\Entity\Entity
 
     public function setPhoto($photo) {
         $this->photo = $photo;
+        return $this;
+    }
+
+    public function getPage() {
+        return $this->page;
+    }
+
+    public function setPage($page) {
+        $this->page = $page;
         return $this;
     }
 

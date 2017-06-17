@@ -41,7 +41,9 @@ class AbsolventPresenter extends BasePresenter
 
     protected function createComponentAbsolventGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Absolvent", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Absolvent", null, array(
+            'page = '.$this->getParameter('idPage')
+        ));
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
@@ -109,6 +111,8 @@ class AbsolventPresenter extends BasePresenter
     {
         $values = $form->getValues();
 
+        $page = $this->em->getRepository('\WebCMS\Entity\Page')->find($this->getParameter('idPage'));
+
         if (!$this->absolvent) {
             $this->absolvent = new Absolvent;
             $this->em->persist($this->absolvent);
@@ -138,6 +142,7 @@ class AbsolventPresenter extends BasePresenter
         $this->absolvent->setName($values->name);
         $this->absolvent->setDepartment($values->department); 
         $this->absolvent->setText($values->text); 
+        $this->absolvent->setPage($page);
         
         $this->absolvent->setActive(true);    
 

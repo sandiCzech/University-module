@@ -209,7 +209,7 @@ class Subject extends \WebCMS\Entity\Entity
     }
 
     public function setTextRequirements($textRequirements) {
-        $this->text = $textRequirements;
+        $this->textRequirements = $textRequirements;
         return $this;
     }
     public function getTextInternship() {

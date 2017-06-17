@@ -148,6 +148,7 @@ class SubjectPresenter extends BasePresenter
 
         $this->subject->setName($values->name);
         $this->subject->setPerex($values->perex);
+        $this->subject->setText($values->text);
         $this->subject->setTextPlan($values->textPlan); 
         $this->subject->setUrlPlan($values->urlPlan); 
         $this->subject->setTextSchedule($values->textSchedule); 
