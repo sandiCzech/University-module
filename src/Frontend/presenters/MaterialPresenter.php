@@ -22,8 +22,6 @@ class MaterialPresenter extends BasePresenter
 
 	private $categoriesRepository;
 
-	private $material;
-
 	private $materials;
 
 	private $categories;
@@ -43,7 +41,10 @@ class MaterialPresenter extends BasePresenter
 
 	public function actionDefault($id)
     {	
-		$this->materials = $this->repository->findAll();
+		$this->materials = $this->repository->findBy(array(
+			'page' => $id
+		));
+
 		$this->categories = $this->categoriesRepository->findAll();
 	}
 
