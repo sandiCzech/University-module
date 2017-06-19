@@ -41,7 +41,7 @@ class Absolvent extends \WebCMS\Entity\Entity
     private $department;
 
     /**
-     * @ORM\Column(type="perex", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $perex;
 
