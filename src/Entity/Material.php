@@ -47,6 +47,12 @@ class Material extends \WebCMS\Entity\Entity
     private $categories;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Field") 
+     * @ORM\JoinTable(name="university_materialfields", joinColumns={@ORM\JoinColumn(name="material_id", referencedColumnName="id", onDelete="CASCADE")}, inverseJoinColumns={@ORM\JoinColumn(name="field_id",referencedColumnName="id", onDelete="CASCADE", unique=false)})
+     */
+    private $fields;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $url;
@@ -113,6 +119,15 @@ class Material extends \WebCMS\Entity\Entity
 
     public function setCategories($categories) {
         $this->categories = $categories;
+        return $this;
+    }
+
+    public function getFields() {
+        return $this->fields;
+    }
+
+    public function setFields($fields) {
+        $this->fields = $fields;
         return $this;
     }
 

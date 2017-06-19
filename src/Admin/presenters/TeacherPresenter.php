@@ -119,6 +119,8 @@ class TeacherPresenter extends BasePresenter
     {
         $values = $form->getValues();
 
+        $page = $this->em->getRepository('\WebCMS\Entity\Page')->find($this->getParameter('idPage'));
+
         if (!$this->teacher) {
             $this->teacher = new Teacher;
             $this->em->persist($this->teacher);
@@ -149,6 +151,7 @@ class TeacherPresenter extends BasePresenter
         $this->teacher->setDepartment($values->department); 
         $this->teacher->setPerex($values->perex);
         $this->teacher->setText($values->text); 
+        $this->teacher->setPage($page);
 
         if ($values->fields) {
             foreach ($values->fields as $key => $value) {

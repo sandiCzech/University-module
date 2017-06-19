@@ -95,9 +95,14 @@ class MaterialPresenter extends BasePresenter
 
         $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Category')->findAll();
 
+        $fields = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
         
         foreach ($options as $option) {
             $optionsToSelect[$option->getId()] = $option->getName();
+        }
+
+        foreach ($fields as $field) {
+            $fieldsToSelect[$field->getId()] = $field->getName();
         }
 
         $form->addText('title', 'Title')
@@ -105,6 +110,7 @@ class MaterialPresenter extends BasePresenter
         $form->addText('url', 'Url');
         $form->addText('author', 'Author');
         $form->addMultiSelect('categories', 'Categories', $optionsToSelect);
+        $form->addMultiSelect('fields', 'Fields', $fieldsToSelect);
         $form->addTextArea('text', 'Text')->setAttribute('class', array('editor'));
 
         if ($this->material) {
@@ -143,6 +149,16 @@ class MaterialPresenter extends BasePresenter
             }
 
             $this->material->setCategories($categories); 
+        }
+
+        if ($values->fields) {
+            foreach ($values->fields as $key => $value) {
+                $field = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->find($value);
+
+                $fields[] = $field;
+            }
+
+            $this->material->setFields($fields); 
         }
         
         $this->material->setActive(true);    
