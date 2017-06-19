@@ -94,6 +94,7 @@ class AbsolventPresenter extends BasePresenter
         $form->addText('name', 'Name')
             ->setRequired('Name is mandatory.');
         $form->addText('department', 'Department');
+        $form->addTextArea('perex', 'Perex')->setAttribute('class', array('editor'));
         $form->addTextArea('text', 'Text')->setAttribute('class', array('editor'));
 
         if ($this->absolvent) {
@@ -141,6 +142,7 @@ class AbsolventPresenter extends BasePresenter
 
         $this->absolvent->setName($values->name);
         $this->absolvent->setDepartment($values->department); 
+        $this->absolvent->setPerex($values->perex); 
         $this->absolvent->setText($values->text); 
         $this->absolvent->setPage($page);
         

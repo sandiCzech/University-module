@@ -41,6 +41,11 @@ class Absolvent extends \WebCMS\Entity\Entity
     private $department;
 
     /**
+     * @ORM\Column(type="perex", nullable=true)
+     */
+    private $perex;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $text;
@@ -99,6 +104,15 @@ class Absolvent extends \WebCMS\Entity\Entity
     public function setDepartment($department)
     {
         $this->department = $department;
+        return $this;
+    }
+
+    public function getPerex() {
+        return $this->perex;
+    }
+
+    public function setPerex($perex) {
+        $this->perex = $perex;
         return $this;
     }
 

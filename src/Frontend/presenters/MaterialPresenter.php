@@ -22,9 +22,13 @@ class MaterialPresenter extends BasePresenter
 
 	private $categoriesRepository;
 
+	private $fieldsRepository;
+
 	private $materials;
 
 	private $categories;
+
+	private $fields;
 	
 	protected function startup() 
     {
@@ -32,6 +36,7 @@ class MaterialPresenter extends BasePresenter
 
 		$this->repository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Material');
 		$this->categoriesRepository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Category');
+		$this->fieldsRepository = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field');
 	}
 
 	protected function beforeRender()
@@ -46,11 +51,13 @@ class MaterialPresenter extends BasePresenter
 		));
 
 		$this->categories = $this->categoriesRepository->findAll();
+		$this->fields = $this->fieldsRepository->findAll();
 	}
 
 	public function renderDefault($id)
 	{
 		$this->template->categories = $this->categories;
+		$this->template->fields = $this->fields;
 		$this->template->materials = $this->materials;
 		$this->template->id = $id;
 	}
