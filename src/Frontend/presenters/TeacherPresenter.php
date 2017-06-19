@@ -44,7 +44,7 @@ class TeacherPresenter extends BasePresenter
 	public function actionDefault($id)
     {	
 		$this->teachers = $this->repository->findAll();
-		$this->fields = $this->fieldsRepository->findAll();
+		$this->fields = $this->fieldsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 
 	public function renderDefault($id)

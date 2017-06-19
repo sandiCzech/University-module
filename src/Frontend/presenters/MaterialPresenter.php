@@ -51,7 +51,7 @@ class MaterialPresenter extends BasePresenter
 		));
 
 		$this->categories = $this->categoriesRepository->findAll();
-		$this->fields = $this->fieldsRepository->findAll();
+		$this->fields = $this->fieldsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 
 	public function renderDefault($id)

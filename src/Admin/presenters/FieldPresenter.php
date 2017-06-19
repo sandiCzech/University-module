@@ -41,7 +41,7 @@ class FieldPresenter extends BasePresenter
 
     protected function createComponentFieldGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Field", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Field", array(array('by' => 'name', 'dir' => 'ASC')), array());
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
