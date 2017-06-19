@@ -179,7 +179,7 @@ class MaterialPresenter extends BasePresenter
                 $counter++;
             }
         } else {
-            $this->material->setPhoto(null); 
+            $this->material->setFile(null); 
         }
         
         $this->material->setActive(true);    
