@@ -58,6 +58,12 @@ class Material extends \WebCMS\Entity\Entity
     private $url;
 
     /**
+     * @ORM\ManyToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="file_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $file;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $text;
@@ -137,6 +143,15 @@ class Material extends \WebCMS\Entity\Entity
 
     public function setUrl($url) {
         $this->url = $url;
+        return $this;
+    }
+
+    public function getFile() {
+        return $this->file;
+    }
+
+    public function setFile($file) {
+        $this->file = $file;
         return $this;
     }
 

@@ -160,6 +160,27 @@ class MaterialPresenter extends BasePresenter
 
             $this->material->setFields($fields); 
         }
+
+        if (array_key_exists('files', $_POST)) {
+
+            $counter = 0;
+            
+            foreach($_POST['files'] as $path){
+
+                $file = new \WebCMS\UniversityModule\Entity\File;
+                $file->setTitle($_POST['fileNames'][$counter]);
+                
+                $file->setPath($path);
+
+                $this->material->setFile($file); 
+
+                $this->em->persist($file);
+
+                $counter++;
+            }
+        } else {
+            $this->material->setPhoto(null); 
+        }
         
         $this->material->setActive(true);    
 
