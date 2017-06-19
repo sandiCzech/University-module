@@ -57,6 +57,12 @@ class Absolvent extends \WebCMS\Entity\Entity
     private $photo;
 
     /**
+     * @gedmo\Slug(fields={"name", "id"})
+     * @ORM\Column(length=64)
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WebCMS\Entity\Page")
      * @orm\JoinColumn(name="page_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -131,6 +137,15 @@ class Absolvent extends \WebCMS\Entity\Entity
 
     public function setPhoto($photo) {
         $this->photo = $photo;
+        return $this;
+    }
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public function setSlug($slug) {
+        $this->slug = $slug;
         return $this;
     }
 

@@ -21,6 +21,8 @@ class AbsolventPresenter extends BasePresenter
 	private $repository;
 
 	private $absolvents;
+
+	private $absolvent;
 	
 	protected function startup() 
     {
@@ -43,6 +45,22 @@ class AbsolventPresenter extends BasePresenter
 
 	public function renderDefault($id)
 	{
+
+		$detail = $this->getParameter('parameters');
+
+		if (count($detail) > 0) {
+		    $this->absolvent = $this->repository->findOneBySlug($detail[0]);
+
+		    if (!is_object($this->absolvent)) {
+				$this->redirect('default', array(
+				    'path' => $this->actualPage->getPath(),
+				    'abbr' => $this->abbr
+				));
+		    } else {
+		    	$this->template->absolvent = $this->absolvent;
+		    }
+		}
+		
 		$this->template->absolvents = $this->absolvents;
 		$this->template->id = $id;
 	}
