@@ -1,0 +1,15 @@
+{block content}
+	
+	<div class="page-heading">
+		<h1>{$actualPage->getTitle()}</h1>
+
+		{include tabs.latte active => 'items'}
+	</div>
+	
+	<br />
+
+	<div class="control-group">
+		{control subjectGrid}
+	</div>
+	
+{/block}

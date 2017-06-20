@@ -60,6 +60,11 @@ class University extends \WebCMS\Module
             'frontend' => true,
             'parameters' => true
         ),
+        array(
+            'name' => 'Highschool',
+            'frontend' => true,
+            'parameters' => true
+        ),
 		array(
 		    'name' => 'Settings',
 		    'frontend' => false
