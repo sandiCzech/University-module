@@ -20,6 +20,26 @@ class Teacher extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $degreeBefore;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $degreeAfter;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $name;
 
     /**
@@ -74,6 +94,49 @@ class Teacher extends \WebCMS\Entity\Entity
      */
     private $page;
 
+    public function getDegreeBefore()
+    {
+        return $this->degreeBefore;
+    }
+    
+    public function setDegreeBefore($degreeBefore)
+    {
+        $this->degreeBefore = $degreeBefore;
+        return $this;
+    }
+
+    public function getDegreeAfter()
+    {
+        return $this->degreeAfter;
+    }
+    
+    public function setDegreeAfter($degreeAfter)
+    {
+        $this->degreeAfter = $degreeAfter;
+        return $this;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+    
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+    
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
 
     public function getName()
     {

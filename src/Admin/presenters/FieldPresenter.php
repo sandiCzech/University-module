@@ -91,6 +91,9 @@ class FieldPresenter extends BasePresenter
         $form->addText('name', 'Name')
             ->setRequired('Name is mandatory.');
 
+        $form->addCheckbox('isTeacher', 'Teachers field?');
+        $form->addCheckbox('isMaterial', 'Materials field?');
+
         if ($this->field) {
             $form->setDefaults($this->field->toArray());
         }
@@ -112,6 +115,8 @@ class FieldPresenter extends BasePresenter
         }
 
         $this->field->setName($values->name);
+        $this->field->setIsTeacher($values->isTeacher);
+        $this->field->setIsMaterial($values->isMaterial);
 
         $this->em->flush();
 

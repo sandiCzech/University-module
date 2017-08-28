@@ -22,6 +22,16 @@ class Field extends \WebCMS\Entity\Entity
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isTeacher;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMaterial;
+
 
     public function getName()
     {
@@ -34,5 +44,26 @@ class Field extends \WebCMS\Entity\Entity
         return $this;
     }
 
+    public function getIsTeacher()
+    {
+        return $this->isTeacher;
+    }
+    
+    public function setIsTeacher($isTeacher)
+    {
+        $this->isTeacher = $isTeacher;
+        return $this;
+    }
+
+    public function getIsMaterial()
+    {
+        return $this->isMaterial;
+    }
+    
+    public function setIsMaterial($isMaterial)
+    {
+        $this->isMaterial = $isMaterial;
+        return $this;
+    }
 
 }

@@ -43,7 +43,9 @@ class TeacherPresenter extends BasePresenter
 
 	public function actionDefault($id)
     {	
-		$this->teachers = $this->repository->findAll();
+		$this->teachers = $this->repository->findBy(array(
+			'isTeacher' => true
+		), array('lastName' => 'ASC'));
 		$this->fields = $this->fieldsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 

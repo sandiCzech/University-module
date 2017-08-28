@@ -41,11 +41,14 @@ class TeacherPresenter extends BasePresenter
 
     protected function createComponentTeacherGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Teacher", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Teacher", array(array('by' => 'lastName', 'dir' => 'ASC')), array());
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
-        $grid->addColumnText('name', 'Name')->setSortable()->setFilterText();
+        $grid->addColumnText('degreeBefore', 'Titul před jménem')->setSortable()->setFilterText();
+        $grid->addColumnText('firstName', 'Jméno')->setSortable()->setFilterText();
+        $grid->addColumnText('lastName', 'Příjmení')->setSortable()->setFilterText();
+        $grid->addColumnText('degreeAfter', 'Titul za jménem')->setSortable()->setFilterText();
         $grid->addColumnText('department', 'Department')->setSortable();
 
         $grid->addActionHref("update", 'Edit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
@@ -97,6 +100,13 @@ class TeacherPresenter extends BasePresenter
             $optionsToSelect[$option->getId()] = $option->getName();
         }
 
+        $form->addText('degreeBefore', 'Titul před jménem');
+        $form->addText('firstName', 'Jméno')
+            ->setRequired('Jméno je povinné.');
+        $form->addText('lastName', 'Příjmení')
+            ->setRequired('Příjmení je povinné.');
+        $form->addText('degreeAfter', 'Titul za jménem');
+
         $form->addText('name', 'Name')
             ->setRequired('Name is mandatory.');
         $form->addText('department', 'Department');
@@ -147,7 +157,10 @@ class TeacherPresenter extends BasePresenter
             $this->teacher->setPhoto(null); 
         }
 
-        $this->teacher->setName($values->name);
+        $this->teacher->setDegreeBefore($values->degreeBefore);
+        $this->teacher->setFirstName($values->firstName);
+        $this->teacher->setLastName($values->lastName);
+        $this->teacher->setDegreeAfter($values->degreeAfter);
         $this->teacher->setDepartment($values->department); 
         $this->teacher->setPerex($values->perex);
         $this->teacher->setText($values->text); 
