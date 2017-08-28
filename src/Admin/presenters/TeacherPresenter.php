@@ -41,13 +41,13 @@ class TeacherPresenter extends BasePresenter
 
     protected function createComponentTeacherGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Teacher", array(array('by' => 'lastName', 'dir' => 'ASC')), array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\UniversityModule\Entity\Teacher", array(array('by' => 'lastname', 'dir' => 'ASC')), array());
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
         $grid->addColumnText('degreeBefore', 'Titul před jménem')->setSortable()->setFilterText();
-        $grid->addColumnText('firstName', 'Jméno')->setSortable()->setFilterText();
-        $grid->addColumnText('lastName', 'Příjmení')->setSortable()->setFilterText();
+        $grid->addColumnText('firstname', 'Jméno')->setSortable()->setFilterText();
+        $grid->addColumnText('lastname', 'Příjmení')->setSortable()->setFilterText();
         $grid->addColumnText('degreeAfter', 'Titul za jménem')->setSortable()->setFilterText();
         $grid->addColumnText('department', 'Department')->setSortable();
 
@@ -93,7 +93,9 @@ class TeacherPresenter extends BasePresenter
     {
         $form = $this->createForm('form-submit', 'default', null);
 
-        $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
+        $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findBy(array(
+            'isTeacher' => true
+        ), array());
 
         
         foreach ($options as $option) {
@@ -101,9 +103,9 @@ class TeacherPresenter extends BasePresenter
         }
 
         $form->addText('degreeBefore', 'Titul před jménem');
-        $form->addText('firstName', 'Jméno')
+        $form->addText('firstname', 'Jméno')
             ->setRequired('Jméno je povinné.');
-        $form->addText('lastName', 'Příjmení')
+        $form->addText('lastname', 'Příjmení')
             ->setRequired('Příjmení je povinné.');
         $form->addText('degreeAfter', 'Titul za jménem');
 
@@ -158,11 +160,12 @@ class TeacherPresenter extends BasePresenter
         }
 
         $this->teacher->setDegreeBefore($values->degreeBefore);
-        $this->teacher->setFirstName($values->firstName);
-        $this->teacher->setLastName($values->lastName);
+        $this->teacher->setFirstname($values->firstname);
+        $this->teacher->setLastname($values->lastname);
         $this->teacher->setDegreeAfter($values->degreeAfter);
         $this->teacher->setDepartment($values->department); 
         $this->teacher->setPerex($values->perex);
+        $this->teacher->setName('test');
         $this->teacher->setText($values->text); 
         $this->teacher->setPage($page);
 

@@ -25,12 +25,12 @@ class Teacher extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firstName;
+    private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $lastName;
+    private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -116,25 +116,25 @@ class Teacher extends \WebCMS\Entity\Entity
         return $this;
     }
 
-    public function getFirstName()
+    public function getFirstname()
     {
-        return $this->firstName;
+        return $this->firstname;
     }
     
-    public function setFirstName($firstName)
+    public function setFirstname($firstname)
     {
-        $this->firstName = $firstName;
+        $this->firstname = $firstname;
         return $this;
     }
 
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->lastName;
+        return $this->lastname;
     }
     
-    public function setLastName($lastName)
+    public function setLastname($lastname)
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
         return $this;
     }
 
