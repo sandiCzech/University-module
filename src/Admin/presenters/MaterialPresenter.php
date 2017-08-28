@@ -95,12 +95,16 @@ class MaterialPresenter extends BasePresenter
 
         $options = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Category')->findAll();
 
-        $fields = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findAll();
+        $fields = $this->em->getRepository('\WebCMS\UniversityModule\Entity\Field')->findBy(array(
+            'isMaterial' => true
+        ), array());
         
+        $optionsToSelect = array();
         foreach ($options as $option) {
             $optionsToSelect[$option->getId()] = $option->getName();
         }
 
+        $fieldsToSelect = array();
         foreach ($fields as $field) {
             $fieldsToSelect[$field->getId()] = $field->getName();
         }

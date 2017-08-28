@@ -108,9 +108,6 @@ class TeacherPresenter extends BasePresenter
         $form->addText('lastname', 'Příjmení')
             ->setRequired('Příjmení je povinné.');
         $form->addText('degreeAfter', 'Titul za jménem');
-
-        $form->addText('name', 'Name')
-            ->setRequired('Name is mandatory.');
         $form->addText('department', 'Department');
         $form->addMultiSelect('fields', 'Fields', $optionsToSelect);
         $form->addTextArea('perex', 'Perex')->setAttribute('class', array('editor'));
@@ -165,7 +162,6 @@ class TeacherPresenter extends BasePresenter
         $this->teacher->setDegreeAfter($values->degreeAfter);
         $this->teacher->setDepartment($values->department); 
         $this->teacher->setPerex($values->perex);
-        $this->teacher->setName('test');
         $this->teacher->setText($values->text); 
         $this->teacher->setPage($page);
 
